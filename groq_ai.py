@@ -30,7 +30,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": f"what's the weather in London {weather}",
         },{
             "role": "user",
-            "content": "Do I need to open the air conditioner right now?",
+            "content": "Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
             }
         ],
         model="llama-3.2-11b-vision-preview",
@@ -42,12 +42,15 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "role": "user",
             "content": f"what's the weather in London {weather}",
         },{
+            "role": "user",
+            "content": "Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
+        },{
             "role": "assistant",
             "content": f"{chat_completion1.choices[0].message.content}",
         },
          {
             "role": "user",
-            "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer yes or no.",
+            "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer Yes or No.",
         }
     ],
     model="llama-3.2-11b-vision-preview",
