@@ -1,6 +1,8 @@
 import requests
 from groq import Groq
+import streamlit as st
 
+WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]  
 def get_weather(query: str) -> list:
     """Search weatherapi to get the current weather"""
     endpoint = f"http://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={query}"
