@@ -48,7 +48,7 @@ ac_preference = st.radio(
     "Select your preference:",
     ["I want air conditioner", "No air conditioner"]
 )
-
+print(ac_preference)
 # Check for Conflicts
 if st.button("Check Availability"):
     conflicts = st.session_state["bookings"][
