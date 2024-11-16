@@ -74,7 +74,7 @@ if st.button("Confirm Booking"):
             "End Time": end_datetime,
             "Name": name,
             "Email": email,
-            "AC On": "Yes" if ac_on else "No"
+            "AC On": "Yes" if ac_on=="Yes" else "No"
         }])
         st.session_state["bookings"] = pd.concat([st.session_state["bookings"], new_booking], ignore_index=True)
         st.success("Booking Confirmed!")
