@@ -52,4 +52,4 @@ def get_llm_decision(start_time,end_time,ac_preference):
     ],
     model="llama-3.2-11b-vision-preview",
 )
-    return chat_completion2.choices[0].message.content
+    return chat_completion1.choices[0].message.content
