@@ -2,6 +2,12 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 
+# Initialize session state for time inputs
+if "start_time" not in st.session_state:
+    st.session_state["start_time"] = (datetime.now() + timedelta(hours=1)).time()
+if "end_time" not in st.session_state:
+    st.session_state["end_time"] = (datetime.now() + timedelta(hours=2)).time()
+
 # Set up the floorplan
 st.title("Shared Office Booking System")
 st.image("floorplan.jpeg", caption="Office Floorplan", use_column_width=True)
@@ -17,8 +23,14 @@ room = st.selectbox("Choose a room to book:", ["Meeting Room", "Office 31a", "Of
 # Date and Time Slot Selection
 st.subheader("Choose a Date and Time Slot")
 booking_date = st.date_input("Select a Date", datetime.now().date())
-start_time = st.time_input("Start Time", (datetime.now() + timedelta(hours=1)).time())
-end_time = st.time_input("End Time", (datetime.now() + timedelta(hours=2)).time())
+
+# Persist time inputs using session state
+start_time = st.time_input("Start Time", st.session_state["start_time"], key="start_time_input")
+end_time = st.time_input("End Time", st.session_state["end_time"], key="end_time_input")
+
+# Update session state whenever time inputs change
+st.session_state["start_time"] = start_time
+st.session_state["end_time"] = end_time
 
 # Combine date and time into datetime objects
 start_datetime = datetime.combine(booking_date, start_time)
@@ -60,5 +72,6 @@ if st.button("Confirm Booking"):
 # Display All Bookings
 st.header("Current Bookings")
 st.write(st.session_state["bookings"])
+
 
 
