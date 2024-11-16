@@ -23,37 +23,23 @@ def get_llm_decision(start_time,end_time,ac_preference):
     client = Groq(
         api_key=GROQ_API_KEY,
     )
+    
+    messages = [
+        {"role": "user", "content": f"What's the weather in London {weather}"},
+        {"role": "user", "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?"}
+    ]
 
     chat_completion1 = client.chat.completions.create(
-        messages=[
-        {
-            "role": "user",
-            "content": f"what's the weather in London {weather}",
-        },{
-            "role": "user",
-            "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
-            }
-        ],
-        model=f"{MODEL_NAME}",
+        messages=messages,
+        model=MODEL_NAME
     )
 
+    messages.append({"role": "assistant", "content": chat_completion1.choices[0].message.content})
+    messages.append({"role": "user", "content": "Based on the previous response, do I need to turn on the air conditioner? Just answer Yes or No."})
+
     chat_completion2 = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": f"what's the weather in London {weather}",
-        },{
-            "role": "user",
-            "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
-        },{
-            "role": "assistant",
-            "content": f"{chat_completion1.choices[0].message.content}",
-        },
-         {
-            "role": "user",
-            "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer Yes or No.",
-        }
-    ],
-    model=f"{MODEL_NAME}",
-)
+        messages=messages,
+        model=MODEL_NAME
+    )
+
     return chat_completion1.choices[0].message.content
