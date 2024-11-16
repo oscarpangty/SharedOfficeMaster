@@ -14,7 +14,7 @@ st.image("floorplan.jpeg", caption="Office Floorplan", use_column_width=True)
 
 # Placeholder for availability data
 if "bookings" not in st.session_state:
-    st.session_state["bookings"] = pd.DataFrame(columns=["Room", "Start Time", "End Time", "Name", "Email"])
+    st.session_state["bookings"] = pd.DataFrame(columns=["Room", "Start Time", "End Time", "Name", "Email", "AC On"])
 
 # Room Selection
 st.header("Book a Room")
@@ -41,6 +41,10 @@ st.subheader("Enter Your Details")
 name = st.text_input("Your Name")
 email = st.text_input("Your Email")
 
+# Air Conditioner Toggle
+st.subheader("Air Conditioner Setting")
+ac_on = st.checkbox("Turn on Air Conditioner for this booking")
+
 # Check for Conflicts
 if st.button("Check Availability"):
     conflicts = st.session_state["bookings"][
@@ -62,7 +66,8 @@ if st.button("Confirm Booking"):
             "Start Time": start_datetime,
             "End Time": end_datetime,
             "Name": name,
-            "Email": email
+            "Email": email,
+            "AC On": "Yes" if ac_on else "No"
         }])
         st.session_state["bookings"] = pd.concat([st.session_state["bookings"], new_booking], ignore_index=True)
         st.success("Booking Confirmed!")
@@ -73,10 +78,15 @@ if st.button("Confirm Booking"):
 st.header("Current Bookings")
 if not st.session_state["bookings"].empty:
     st.dataframe(
-        st.session_state["bookings"].style.set_properties(**{'text-align': 'left'}),
+        st.session_state["bookings"],
         use_container_width=True,
     )
 else:
     st.write("No bookings yet.")
+
+# Feedback Textbox for AI Management System
+st.subheader("AI Management Feedback")
+feedback = "System is operating normally. All rooms are adequately managed."
+st.text_area("Feedback from AI Management System", value=feedback, height=100, disabled=True)
 
 
