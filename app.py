@@ -43,8 +43,11 @@ name = st.text_input("Your Name")
 email = st.text_input("Your Email")
 
 # Air Conditioner Toggle
-st.subheader("Air Conditioner Setting")
-ac_on = st.checkbox("Turn on Air Conditioner for this booking")
+st.subheader("Air Conditioner Preference")
+ac_preference = st.radio(
+    "Select your preference:",
+    ["I want air conditioner", "No air conditioner"]
+)
 
 # Check for Conflicts
 if st.button("Check Availability"):
@@ -62,7 +65,7 @@ if st.button("Check Availability"):
 # Confirm Booking
 if st.button("Confirm Booking"):
     if name and email:
-        llm_decision = get_llm_decision(start_time, end_time)
+        llm_decision = get_llm_decision(start_time, end_time, ac_preference)
         st.session_state["llm_feedback"] = llm_decision
         ac_on = "Yes" if "Yes" in llm_decision else "No"
         new_booking = pd.DataFrame([{
