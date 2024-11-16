@@ -17,4 +17,4 @@ def get_weather(query: str) -> list:
 
 def get_llm_decision(start_time,end_time,ac_preference):
   weather=get_weather("London weather now")
-  return "Yes. Fine"+weather
+  return "Yes. Fine "+ weather
