@@ -31,7 +31,7 @@ tabs = st.tabs(["Booking System", "Room Analysis"])
 with tabs[0]:
     # Booking System Page
     st.title("Shared Office Booking System")
-    st.image("floorplan.jpeg", caption="Office Floorplan", use_column_width=True)
+    st.image("Floorplan.png", caption="Office Floorplan", use_column_width=True)
 
     # Room Selection
     st.header("Book a Room")
