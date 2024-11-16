@@ -4,6 +4,7 @@ import streamlit as st
 
 WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]  
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]  
+MODEL_NAME="llama-3.2-11b-vision-preview"
 
 def get_weather(query: str) -> list:
     """Search weatherapi to get the current weather"""
@@ -33,7 +34,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": "Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
             }
         ],
-        model="llama-3.2-11b-vision-preview",
+        model={MODEL_NAME},
     )
 
     chat_completion2 = client.chat.completions.create(
@@ -53,6 +54,6 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer Yes or No.",
         }
     ],
-    model="llama-3.2-11b-vision-preview",
+    model={MODEL_NAME},
 )
     return chat_completion1.choices[0].message.content
