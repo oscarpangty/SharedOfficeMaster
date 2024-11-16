@@ -132,28 +132,44 @@ with tabs[1]:  # Room Analysis
     st.subheader("Analysis Data")
     st.dataframe(analysis_data)
 
-    # Single Chart for Room Size, Usage Time, and Energy Consumption
-    st.subheader("Room Size, Usage Time, and Energy Consumption")
+    # Bubble Chart for Room Size, Usage Time, and Energy Consumption
+    st.subheader("Bubble Chart: Room Size vs. Usage Time with Energy Consumption")
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
-    bar_width = 0.25  # Width of each bar
-    index = range(len(analysis_data))  # Room indices
+    # Create a scatter plot (bubble chart)
+    scatter = ax.scatter(
+        analysis_data["Size (m²)"],               # X-axis: Room Size
+        analysis_data["Usage Time (hours)"],      # Y-axis: Usage Time
+        s=analysis_data["Energy Consumption (kWh)"] * 10,  # Bubble size: Energy Consumption (scaled)
+        alpha=0.7,                                # Transparency
+        c=range(len(analysis_data)),              # Color based on room index
+        cmap="viridis"                            # Colormap
+    )
 
-    # Plot each factor as a separate group
-    ax.bar([i - bar_width for i in index], analysis_data["Size (m²)"], bar_width, label="Room Size (m²)")
-    ax.bar(index, analysis_data["Usage Time (hours)"], bar_width, label="Usage Time (hours)", color="orange")
-    ax.bar([i + bar_width for i in index], analysis_data["Energy Consumption (kWh)"], bar_width, label="Energy Consumption (kWh)", color="green")
+    # Add labels to each bubble
+    for i, row in analysis_data.iterrows():
+        ax.text(
+            row["Size (m²)"], 
+            row["Usage Time (hours)"], 
+            row["Room"], 
+            fontsize=9, 
+            ha='center', 
+            va='center'
+        )
 
     # Customize chart
-    ax.set_xlabel("Room")
-    ax.set_ylabel("Values")
-    ax.set_title("Room Size, Usage Time, and Energy Consumption")
-    ax.set_xticks(index)
-    ax.set_xticklabels(analysis_data["Room"])
-    ax.legend()
+    ax.set_xlabel("Room Size (m²)")
+    ax.set_ylabel("Usage Time (hours)")
+    ax.set_title("Bubble Chart: Room Size vs. Usage Time with Energy Consumption")
+    ax.grid(True)
+
+    # Add color bar for reference
+    cbar = fig.colorbar(scatter, ax=ax)
+    cbar.set_label("Room Index")
 
     # Display the chart
     st.pyplot(fig)
+
 
 
