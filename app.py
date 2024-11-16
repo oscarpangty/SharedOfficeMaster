@@ -26,9 +26,9 @@ room_sizes = {
 }
 
 # Page Navigation
-page = st.sidebar.radio("Navigate", ["Booking System", "Room Analysis"])
+tabs = st.tabs(["Booking System", "Room Analysis"])
 
-if page == "Booking System":
+with tabs[0]:
     # Booking System Page
     st.title("Shared Office Booking System")
     st.image("floorplan.jpeg", caption="Office Floorplan", use_column_width=True)
@@ -104,7 +104,7 @@ if page == "Booking System":
     st.subheader("AI Management Feedback")
     st.text_area("Feedback from AI Management System", value=st.session_state["llm_feedback"], height=100, disabled=True)
 
-elif page == "Room Analysis":
+with tabs[1]:
     # Room Analysis Page
     st.title("Room Analysis")
 
