@@ -1,23 +1,2 @@
 def get_llm_decision(start_time, end_time):
-    prompt = f"""
-    Decide whether the air conditioner should be turned on for a booking based on the time range:
-    - Booking Start Time: {start_time}
-    - Booking End Time: {end_time}
-
-    Consider that:
-    - The AC is usually required if the booking is during hot hours (e.g., 11 AM to 4 PM).
-    - Provide a reason for your decision.
-
-    Your response should be in this format:
-    "Turn On AC: Yes/No. Reason: <reason>"
-    """
-    try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # Replace with your LLM engine
-            prompt=prompt,
-            max_tokens=100,
-        )
-        decision = response.choices[0].text.strip()
-        return decision
-    except Exception as e:
-        return f"Error: {e}"
+    return "Yes"
