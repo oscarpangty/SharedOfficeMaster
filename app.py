@@ -104,15 +104,13 @@ with tabs[0]:
     st.subheader("AI Management Feedback")
     st.text_area("Feedback from AI Management System", value=st.session_state["llm_feedback"], height=100, disabled=True)
 
-with tabs[1]:
-    # Room Analysis Page
+with tabs[1]:  # Room Analysis
     st.title("Room Analysis")
 
     # Input energy consumption manually
     st.subheader("Input Energy Consumption (kWh)")
     for room in room_sizes.keys():
-        current_energy = float(st.session_state["energy_data"][room])
-        energy = st.number_input(f"{room}", value=current_energy, step=1.0)
+        energy = st.number_input(f"{room}", value=float(st.session_state["energy_data"][room]), step=1.0)
         st.session_state["energy_data"][room] = energy
 
     # Calculate total booked time per room
@@ -134,30 +132,28 @@ with tabs[1]:
     st.subheader("Analysis Data")
     st.dataframe(analysis_data)
 
-    # Charts
-    st.subheader("Charts")
+    # Single Chart for Room Size, Usage Time, and Energy Consumption
+    st.subheader("Room Size, Usage Time, and Energy Consumption")
 
-    # Room Size vs Energy Consumption
-    fig1, ax1 = plt.subplots()
-    ax1.bar(analysis_data["Room"], analysis_data["Size (m²)"])
-    ax1.set_xlabel("Room")
-    ax1.set_ylabel("Size (m²)")
-    ax1.set_title("Room Sizes")
-    st.pyplot(fig1)
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    # Usage Time
-    fig2, ax2 = plt.subplots()
-    ax2.bar(analysis_data["Room"], analysis_data["Usage Time (hours)"], color="orange")
-    ax2.set_xlabel("Room")
-    ax2.set_ylabel("Usage Time (hours)")
-    ax2.set_title("Usage Time by Room")
-    st.pyplot(fig2)
+    bar_width = 0.25  # Width of each bar
+    index = range(len(analysis_data))  # Room indices
 
-    # Energy Consumption
-    fig3, ax3 = plt.subplots()
-    ax3.bar(analysis_data["Room"], analysis_data["Energy Consumption (kWh)"], color="green")
-    ax3.set_xlabel("Room")
-    ax3.set_ylabel("Energy Consumption (kWh)")
-    ax3.set_title("Energy Consumption by Room")
-    st.pyplot(fig3)
+    # Plot each factor as a separate group
+    ax.bar([i - bar_width for i in index], analysis_data["Size (m²)"], bar_width, label="Room Size (m²)")
+    ax.bar(index, analysis_data["Usage Time (hours)"], bar_width, label="Usage Time (hours)", color="orange")
+    ax.bar([i + bar_width for i in index], analysis_data["Energy Consumption (kWh)"], bar_width, label="Energy Consumption (kWh)", color="green")
+
+    # Customize chart
+    ax.set_xlabel("Room")
+    ax.set_ylabel("Values")
+    ax.set_title("Room Size, Usage Time, and Energy Consumption")
+    ax.set_xticks(index)
+    ax.set_xticklabels(analysis_data["Room"])
+    ax.legend()
+
+    # Display the chart
+    st.pyplot(fig)
+
 
