@@ -25,7 +25,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
     )
     
     messages = [
-        {"role": "user", "content": f"What's the weather in London {weather}"},
+        {"role": "user", "content": f"What's the weather in this location {weather}"},
         {"role": "user", "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?"}
     ]
 
