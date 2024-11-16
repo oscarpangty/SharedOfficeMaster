@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
+from groq_ai import get_llm_decision
 
 # Initialize session state for time inputs
 if "start_time" not in st.session_state:
@@ -61,6 +62,8 @@ if st.button("Check Availability"):
 # Confirm Booking
 if st.button("Confirm Booking"):
     if name and email:
+        llm_decision = get_llm_decision(start_time, end_time)
+        ac_on = "Yes" if "Yes" in llm_decision else "No"
         new_booking = pd.DataFrame([{
             "Room": room,
             "Start Time": start_datetime,
