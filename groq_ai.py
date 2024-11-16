@@ -23,7 +23,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
         api_key=GROQ_API_KEY,
     )
 
-    chat_completion = client.chat.completions.create(
+    chat_completion1 = client.chat.completions.create(
         messages=[
         {
             "role": "user",
@@ -35,4 +35,21 @@ def get_llm_decision(start_time,end_time,ac_preference):
         ],
         model="llama-3.2-11b-vision-preview",
     )
-    return chat_completion.choices[0].message.content
+
+    chat_completion2 = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": f"what's the weather in London {weather}",
+        },{
+            "role": "assistant",
+            "content": f"{chat_completion.choices[0].message.content}",
+        },
+         {
+            "role": "user",
+            "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer yes or no.",
+        }
+    ],
+    model="llama-3.2-11b-vision-preview",
+)
+    return chat_completion2.choices[0].message.content
