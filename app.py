@@ -71,7 +71,12 @@ if st.button("Confirm Booking"):
 
 # Display All Bookings
 st.header("Current Bookings")
-st.write(st.session_state["bookings"])
-
+if not st.session_state["bookings"].empty:
+    st.dataframe(
+        st.session_state["bookings"].style.set_properties(**{'text-align': 'left'}),
+        use_container_width=True,
+    )
+else:
+    st.write("No bookings yet.")
 
 
