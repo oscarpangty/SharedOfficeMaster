@@ -111,8 +111,8 @@ elif page == "Room Analysis":
     # Input energy consumption manually
     st.subheader("Input Energy Consumption (kWh)")
     for room in room_sizes.keys():
-        energy = st.number_input(f"{room}", value=st.session_state["energy_data"][room], step=1.0)
-        st.session_state["energy_data"][room] = energy
+        energy = st.number_input(f"{room}", value=int(current_energy), step=1)
+        st.session_state["energy_data"][room] = float(energy)
 
     # Calculate total booked time per room
     usage_times = {room: 0 for room in room_sizes.keys()}
