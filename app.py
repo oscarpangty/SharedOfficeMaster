@@ -45,14 +45,14 @@ if st.button("Check Availability"):
 # Confirm Booking
 if st.button("Confirm Booking"):
     if name and email:
-        new_booking = {
+        new_booking = pd.DataFrame([{
             "Room": room,
             "Start Time": start_datetime,
             "End Time": end_datetime,
             "Name": name,
             "Email": email
-        }
-        st.session_state["bookings"] = st.session_state["bookings"].append(new_booking, ignore_index=True)
+        }])
+        st.session_state["bookings"] = pd.concat([st.session_state["bookings"], new_booking], ignore_index=True)
         st.success("Booking Confirmed!")
     else:
         st.error("Please fill in all required fields.")
@@ -60,4 +60,5 @@ if st.button("Confirm Booking"):
 # Display All Bookings
 st.header("Current Bookings")
 st.write(st.session_state["bookings"])
+
 
