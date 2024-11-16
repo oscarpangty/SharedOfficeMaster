@@ -14,10 +14,15 @@ if "bookings" not in st.session_state:
 st.header("Book a Room")
 room = st.selectbox("Choose a room to book:", ["Meeting Room", "Office 31a", "Office 31b", "Office 30", "Office 32"])
 
-# Time Slot Selection
-st.subheader("Choose a Time Slot")
-start_time = st.datetime_input("Start Time", datetime.now() + timedelta(hours=1))
-end_time = st.datetime_input("End Time", start_time + timedelta(hours=1))
+# Date and Time Slot Selection
+st.subheader("Choose a Date and Time Slot")
+booking_date = st.date_input("Select a Date", datetime.now().date())
+start_time = st.time_input("Start Time", (datetime.now() + timedelta(hours=1)).time())
+end_time = st.time_input("End Time", (datetime.now() + timedelta(hours=2)).time())
+
+# Combine date and time into datetime objects
+start_datetime = datetime.combine(booking_date, start_time)
+end_datetime = datetime.combine(booking_date, end_time)
 
 # User Info
 st.subheader("Enter Your Details")
@@ -28,8 +33,8 @@ email = st.text_input("Your Email")
 if st.button("Check Availability"):
     conflicts = st.session_state["bookings"][
         (st.session_state["bookings"]["Room"] == room) &
-        (st.session_state["bookings"]["Start Time"] < end_time) &
-        (st.session_state["bookings"]["End Time"] > start_time)
+        (st.session_state["bookings"]["Start Time"] < end_datetime) &
+        (st.session_state["bookings"]["End Time"] > start_datetime)
     ]
 
     if not conflicts.empty:
@@ -42,8 +47,8 @@ if st.button("Confirm Booking"):
     if name and email:
         new_booking = {
             "Room": room,
-            "Start Time": start_time,
-            "End Time": end_time,
+            "Start Time": start_datetime,
+            "End Time": end_datetime,
             "Name": name,
             "Email": email
         }
@@ -55,3 +60,4 @@ if st.button("Confirm Booking"):
 # Display All Bookings
 st.header("Current Bookings")
 st.write(st.session_state["bookings"])
+
