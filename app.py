@@ -32,7 +32,7 @@ end_time = st.time_input("End Time", st.session_state["end_time"], key="end_time
 # Update session state whenever time inputs change
 st.session_state["start_time"] = start_time
 st.session_state["end_time"] = end_time
-
+st.session_state["llm_feedback"]="System is operating normally. All rooms are adequately managed."
 # Combine date and time into datetime objects
 start_datetime = datetime.combine(booking_date, start_time)
 end_datetime = datetime.combine(booking_date, end_time)
