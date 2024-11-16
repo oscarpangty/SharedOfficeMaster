@@ -34,7 +34,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": "Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now?",
             }
         ],
-        model={MODEL_NAME},
+        model=f"{MODEL_NAME}",
     )
 
     chat_completion2 = client.chat.completions.create(
@@ -54,6 +54,6 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": "Based on previously response, Do I need to turn on the air conditioner? Just answer Yes or No.",
         }
     ],
-    model={MODEL_NAME},
+    model=f"{MODEL_NAME}",
 )
     return chat_completion1.choices[0].message.content
