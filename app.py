@@ -95,4 +95,6 @@ else:
 st.subheader("AI Management Feedback")
 st.text_area("Feedback from AI Management System", value=st.session_state["llm_feedback"], height=100, disabled=True)
 
+st.write(f"You selected: {ac_preference}")
+
 
