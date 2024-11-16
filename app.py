@@ -63,6 +63,7 @@ if st.button("Check Availability"):
 if st.button("Confirm Booking"):
     if name and email:
         llm_decision = get_llm_decision(start_time, end_time)
+        st.session_state["llm_feedback"] = llm_decision
         ac_on = "Yes" if "Yes" in llm_decision else "No"
         new_booking = pd.DataFrame([{
             "Room": room,
@@ -89,7 +90,6 @@ else:
 
 # Feedback Textbox for AI Management System
 st.subheader("AI Management Feedback")
-feedback = "System is operating normally. All rooms are adequately managed."
-st.text_area("Feedback from AI Management System", value=feedback, height=100, disabled=True)
+st.text_area("Feedback from AI Management System", value=st.session_state["llm_feedback"], height=100, disabled=True)
 
 
