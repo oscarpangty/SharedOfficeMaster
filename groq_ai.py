@@ -43,7 +43,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
             "content": f"what's the weather in London {weather}",
         },{
             "role": "assistant",
-            "content": f"{chat_completion.choices[0].message.content}",
+            "content": f"{chat_completion1.choices[0].message.content}",
         },
          {
             "role": "user",
