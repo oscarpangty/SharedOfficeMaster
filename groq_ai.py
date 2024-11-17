@@ -72,5 +72,5 @@ def analyze_graph(image_path):
         ],
         model="llama-3.2-90b-vision-preview",
     )
-    response = "This is a sample response from the LLM analyzing the bubble chart."
+    response = chat_completion.choices[0].message.content
     return response
