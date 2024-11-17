@@ -166,8 +166,8 @@ with tabs[1]:  # Room Analysis
     ax.grid(True)
 
     # Add color bar for reference
-    cbar = fig.colorbar(scatter, ax=ax)
-    cbar.set_label("Room Index")
+    #cbar = fig.colorbar(scatter, ax=ax)
+    #cbar.set_label("Room Index")
 
     # Display the chart
     st.pyplot(fig)
