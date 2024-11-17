@@ -44,7 +44,7 @@ def get_llm_decision(start_time,end_time,ac_preference,room_id):
     )
 
     messages.append({"role": "assistant", "content": chat_completion2.choices[0].message.content})
-    messages.append({"role": "user", "content": "Now start the AC. Set temperature based on previous info. Set mode between cooling and heating. Set fan speed among low, high and auto. Only output jason code in this format: {\"device\": {\"buildingId\": \"12345\", \"deviceId\": \"{room_id}\", \"start_time\": \"{start_time}\",\"end_time\": \"{end_time}\",\"mode\": \"heating\", \"targetTemp\": 22, \"fanSpeed\": \"high\"}} no comments. Only change mode, fanSpeed and targetTemp"})
+    messages.append({"role": "user", "content": f"Now start the AC. Set temperature based on previous info. Set mode between cooling and heating. Set fan speed among low, high and auto. Only output jason code in this format: {\"device\": {\"buildingId\": \"12345\", \"deviceId\": \"{room_id}\", \"start_time\": \"{start_time}\",\"end_time\": \"{end_time}\",\"mode\": \"heating\", \"targetTemp\": 22, \"fanSpeed\": \"high\"}} no comments. Only change mode, fanSpeed and targetTemp"})
 
     chat_completion3 = client.chat.completions.create(
         messages=messages,
