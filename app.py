@@ -17,13 +17,14 @@ if "bookings" not in st.session_state:
 if "energy_data" not in st.session_state:
     st.session_state["energy_data"] = {"Meeting Room": 0, "Office 31a": 0, "Office 31b": 0, "Office 30": 0, "Office 32": 0}
 
+
 # Room sizes (preset)
 room_sizes = {
     "Meeting Room": 50,  # in square meters
-    "Office 31a": 70,
-    "Office 31b": 65,
-    "Office 30": 15,
-    "Office 32": 20,
+    "Office 31a": 30,
+    "Office 31b": 25,
+    "Office 30": 20,
+    "Office 32": 35,
 }
 
 # Page Navigation
