@@ -7,14 +7,6 @@ WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]  
 MODEL_NAME="llama-3.2-11b-vision-preview"
 
-room_deviceid = {
-    "Meeting Room": 67890,  # in square meters
-    "Office 31a": 67891,
-    "Office 31b": 67892,
-    "Office 30": 67893,
-    "Office 32": 67894,
-}
-
 def get_weather(query: str) -> list:
     """Search weatherapi to get the current weather"""
     endpoint = f"http://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={query}"
@@ -27,7 +19,7 @@ def get_weather(query: str) -> list:
         return "Weather Data Not Found"
     
 
-def get_llm_decision(start_time,end_time,ac_preference,room):
+def get_llm_decision(start_time,end_time,ac_preference,room_id):
     weather=get_weather("London weather now")
     client = Groq(
         api_key=GROQ_API_KEY,
@@ -52,7 +44,7 @@ def get_llm_decision(start_time,end_time,ac_preference,room):
     )
 
     messages.append({"role": "assistant", "content": chat_completion2.choices[0].message.content})
-    messages.append({"role": "user", "content": "Now start the AC. Set temperature based on previous info. Set mode between cooling and heating. Set fan speed among low, high and auto. Only output jason code in this format: {\"device\": {\"buildingId\": \"12345\", \"deviceId\": \"{room_deviceid.get(room)}\", \"start_time\": \"{start_time}\",\"end_time\": \"{end_time}\",\"mode\": \"heating\", \"targetTemp\": 22, \"fanSpeed\": \"high\"}} no comments"})
+    messages.append({"role": "user", "content": "Now start the AC. Set temperature based on previous info. Set mode between cooling and heating. Set fan speed among low, high and auto. Only output jason code in this format: {\"device\": {\"buildingId\": \"12345\", \"deviceId\": \"{room_id}\", \"start_time\": \"{start_time}\",\"end_time\": \"{end_time}\",\"mode\": \"heating\", \"targetTemp\": 22, \"fanSpeed\": \"high\"}} no comments"})
 
     chat_completion3 = client.chat.completions.create(
         messages=messages,
