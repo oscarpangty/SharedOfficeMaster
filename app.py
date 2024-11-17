@@ -175,7 +175,7 @@ with tabs[1]:  # Room Analysis
     if st.button("Generate Insight"):
         save_path = "bubble_chart.png"
         fig.savefig(save_path)
-        st.success(f"Bubble chart saved locally as {save_path}")
+        #st.success(f"Bubble chart saved locally as {save_path}")
 
         result = analyze_graph(save_path)
         st.info(f"Analysis result: {result}")
