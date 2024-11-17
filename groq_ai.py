@@ -1,6 +1,7 @@
 import requests
 from groq import Groq
 import streamlit as st
+import base64
 
 WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]  
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]  
