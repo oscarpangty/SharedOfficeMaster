@@ -27,7 +27,7 @@ def get_weather(query: str) -> list:
         return "Weather Data Not Found"
     
 
-def get_llm_decision(start_time,end_time,ac_preference):
+def get_llm_decision(start_time,end_time,ac_preference,room):
     weather=get_weather("London weather now")
     client = Groq(
         api_key=GROQ_API_KEY,
