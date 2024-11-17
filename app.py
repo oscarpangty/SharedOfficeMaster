@@ -79,9 +79,9 @@ with tabs[0]:
     # Confirm Booking
     if st.button("Confirm Booking"):
         if name and email:
-            llm_decision = get_llm_decision(start_time, end_time, ac_preference)
+            {llm_analysis,llm_decision} = get_llm_decision(start_time, end_time, ac_preference)
             st.info(llm_decision)
-            st.session_state["llm_feedback"] = llm_decision
+            st.session_state["llm_feedback"] = llm_analysis
             ac_on = "Yes" if "Yes" in llm_decision else "No"
             new_booking = pd.DataFrame([{
                 "Room": room,
