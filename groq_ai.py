@@ -60,7 +60,7 @@ def analyze_graph(image_path):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "According to the image, what's in the image?"},
+                    {"type": "text", "text": "You are a smart office AI manager. Find any energy consumption anomaly in the graph. Give insights such as that one specific room has odd energy consumption pattern please inspect the equipment and the room insulation."},
                     {
                         "type": "image_url",
                         "image_url": {
