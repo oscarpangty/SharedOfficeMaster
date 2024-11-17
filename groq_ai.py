@@ -27,7 +27,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
     
     messages = [
         {"role": "user", "content": f"What's the weather in this location {weather}"},
-        {"role": "user", "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now? It is usually accepted that people work best at a temperature between 16°C and 24°C"}
+        {"role": "user", "content": f"Here is my preference about air conditioner: {ac_preference}, Do I need to open the air conditioner right now? Don't consider heater. It is usually accepted that people work best at a temperature between 16°C and 24°C"}
     ]
 
     chat_completion1 = client.chat.completions.create(
