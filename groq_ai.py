@@ -60,7 +60,7 @@ def analyze_graph(image_path):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "According to the image, what's toy's occupany?"},
+                    {"type": "text", "text": "According to the image, what's in the image?"},
                     {
                         "type": "image_url",
                         "image_url": {
