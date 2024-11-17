@@ -60,7 +60,7 @@ def analyze_graph(image_path):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "You are a smart office AI manager. Find any energy consumption anomaly in the graph. Give insights such as that one specific room has odd energy consumption pattern please inspect the equipment and the room insulation."},
+                    {"type": "text", "text": "This is a bubble chart. x-axis is the room size. y-axis is the usage time. Bubble size represents AC energy consumption while different colors represent different rooms. Find any energy consumption anomaly in this bubble chart. Give insights such as that one specific room has odd energy consumption pattern please inspect the equipment and the room insulation."},
                     {
                         "type": "image_url",
                         "image_url": {
