@@ -5,7 +5,7 @@ import base64
 
 WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]  
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]  
-MODEL_NAME="llama-3.2-11b-vision-preview"
+MODEL_NAME="llama-3.2-3b-preview"
 
 def get_weather(query: str) -> list:
     """Search weatherapi to get the current weather"""
