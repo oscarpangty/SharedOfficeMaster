@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 from groq_ai import get_llm_decision
+from groq_ai import analyze_graph
 import matplotlib.pyplot as plt
 
 # Initialize session state
@@ -171,5 +172,11 @@ with tabs[1]:  # Room Analysis
     # Display the chart
     st.pyplot(fig)
 
+    if st.button("Generate Insight"):
+        save_path = "bubble_chart.png"
+        fig.savefig(save_path)
+        st.success(f"Bubble chart saved locally as {save_path}")
 
+        result = analyze_chart(save_path)
+        st.info(f"Analysis result: {result}")
 
