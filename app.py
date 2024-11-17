@@ -20,10 +20,10 @@ if "energy_data" not in st.session_state:
 # Room sizes (preset)
 room_sizes = {
     "Meeting Room": 50,  # in square meters
-    "Office 31a": 30,
-    "Office 31b": 25,
+    "Office 31a": 70,
+    "Office 31b": 65,
     "Office 30": 20,
-    "Office 32": 35,
+    "Office 32": 20,
 }
 
 # Page Navigation
