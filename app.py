@@ -22,7 +22,7 @@ room_sizes = {
     "Meeting Room": 50,  # in square meters
     "Office 31a": 70,
     "Office 31b": 65,
-    "Office 30": 20,
+    "Office 30": 15,
     "Office 32": 20,
 }
 
