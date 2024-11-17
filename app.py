@@ -27,6 +27,14 @@ room_sizes = {
     "Office 32": 35,
 }
 
+room_deviceid = {
+    "Meeting Room": 67890,  
+    "Office 31a": 67891,
+    "Office 31b": 67892,
+    "Office 30": 67893,
+    "Office 32": 67894,
+} 
+
 # Page Navigation
 tabs = st.tabs(["Booking System", "Room Analysis"])
 
@@ -79,7 +87,7 @@ with tabs[0]:
     # Confirm Booking
     if st.button("Confirm Booking"):
         if name and email:
-            llm_analysis,llm_decision,ac_start_code = get_llm_decision(start_time, end_time, ac_preference, room)
+            llm_analysis,llm_decision,ac_start_code = get_llm_decision(start_time, end_time, ac_preference, room_deviceid.get(room))
             st.info(ac_start_code)
             st.session_state["llm_feedback"] = llm_analysis
             ac_on = "Yes" if "Yes" in llm_decision else "No"
