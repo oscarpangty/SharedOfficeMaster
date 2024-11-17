@@ -7,6 +7,14 @@ WEATHER_API_KEY=st.secrets["WEATHER_API_KEY"]
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]  
 MODEL_NAME="llama-3.2-11b-vision-preview"
 
+room_deviceid = {
+    "Meeting Room": 67890,  # in square meters
+    "Office 31a": 67891,
+    "Office 31b": 67892,
+    "Office 30": 67893,
+    "Office 32": 67894,
+}
+
 def get_weather(query: str) -> list:
     """Search weatherapi to get the current weather"""
     endpoint = f"http://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={query}"
