@@ -45,6 +45,32 @@ def get_llm_decision(start_time,end_time,ac_preference):
 
     return chat_completion1.choices[0].message.content
 
-def analyze_graph(image_data):
+def encode_image(image_path):
+  with open(image_path, "rb") as image_file:
+    return base64.b64encode(image_file.read()).decode('utf-8')
+      
+def analyze_graph(image_path):
+    base64_image = encode_image(image_path)
+
+    client = Groq(
+        api_key=GROQ_API_KEY,
+    )
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": "According to the image, what's toy's occupany?"},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{base64_image}",
+                        },
+                    },
+                ],
+            }
+        ],
+        model="llama-3.2-90b-vision-preview",
+    )
     response = "This is a sample response from the LLM analyzing the bubble chart."
     return response
