@@ -43,7 +43,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
         model=MODEL_NAME
     )
 
-    return chat_completion2.choices[0].message.content
+    return chat_completion1.choices[0].message.content
 
 def encode_image(image_path):
   with open(image_path, "rb") as image_file:
