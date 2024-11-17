@@ -43,3 +43,7 @@ def get_llm_decision(start_time,end_time,ac_preference):
     )
 
     return chat_completion1.choices[0].message.content
+
+def analyze_graph(image_data):
+    response = "This is a sample response from the LLM analyzing the bubble chart."
+    return response
