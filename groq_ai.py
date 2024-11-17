@@ -60,7 +60,7 @@ def analyze_graph(image_path):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "This is a bubble chart. x-axis is the room size. y-axis is the usage time. Bubble size represents AC energy consumption while different colors represent different rooms. Tell if any room has shown energy consumption anomaly in this bubble chart. Give insights such as that one specific room has odd energy consumption pattern please inspect the equipment and the room insulation."},
+                    {"type": "text", "text": "This is a bubble chart. x-axis is the room size. y-axis is the usage time. Bubble size represents AC energy consumption while different colors represent different rooms. Tell if any room has shown energy consumption anomaly in this bubble chart. Focus on rooms with usually higher energy consumption and give insights such as that one specific room has odd energy consumption pattern please inspect the equipment and the room insulation."},
                     {
                         "type": "image_url",
                         "image_url": {
