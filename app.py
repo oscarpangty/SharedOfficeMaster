@@ -177,6 +177,6 @@ with tabs[1]:  # Room Analysis
         fig.savefig(save_path)
         st.success(f"Bubble chart saved locally as {save_path}")
 
-        result = analyze_chart(save_path)
+        result = analyze_graph(save_path)
         st.info(f"Analysis result: {result}")
 
