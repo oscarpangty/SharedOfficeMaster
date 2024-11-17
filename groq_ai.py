@@ -17,7 +17,7 @@ def get_weather(query: str) -> list:
         return data
     else:
         return "Weather Data Not Found"
-
+    
 
 def get_llm_decision(start_time,end_time,ac_preference):
     weather=get_weather("London weather now")
@@ -43,7 +43,15 @@ def get_llm_decision(start_time,end_time,ac_preference):
         model=MODEL_NAME
     )
 
-    return {chat_completion1.choices[0].message.content,chat_completion2.choices[0].message.content}
+    messages.append({"role": "assistant", "content": chat_completion2.choices[0].message.content})
+    messages.append({"role": "user", "content": "Now start the AC, output jason code in this format: {\"device\": {\"buildingId\": \"12345\", \"deviceId\": \"67890\", \"mode\": \"cooling\", \"targetTemp\": 22, \"fanSpeed\": \"high\"}}"})
+
+    chat_completion3 = client.chat.completions.create(
+        messages=messages,
+        model=MODEL_NAME
+    )
+
+    return {chat_completion1.choices[0].message.content,chat_completion2.choices[0].message.content,chat_completion3.choices[0].message.content}
 
 def encode_image(image_path):
   with open(image_path, "rb") as image_file:
