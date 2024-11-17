@@ -47,7 +47,7 @@ def get_llm_decision(start_time,end_time,ac_preference,room_id):
     messages.append({
     "role": "user",
     "content": f"Now start the AC. Set temperature based on previous info. "
-               f"Set mode between cooling and heating. When current temperature is lower than comfort temperature set heating otherwise cooling. Set fan speed among low, high and auto. If the difference between current temperature and comfort temperature is big set high otherwise low and comfort. Also sets the start time a little bit in advance to give AC enough time to make the room comfortable"
+               f"Set mode between cooling and heating. Remember when current temperature is lower than comfort temperature set heating otherwise cooling. Set fan speed among low, high and auto. If the difference between current temperature and comfort temperature is big set high otherwise low and comfort. Also sets the start time a little bit in advance to give AC enough time to make the room comfortable"
                f"Only output JSON code in this format: "
                f"{{\"device\": {{\"buildingId\": \"12345\", \"deviceId\": \"{room_id}\", "
                f"\"start_time\": \"{start_time}\", \"end_time\": \"{end_time}\", "
